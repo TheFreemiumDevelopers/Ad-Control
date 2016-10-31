@@ -11,11 +11,13 @@ Building
 
 ### Requirements
 
-- [Mercurial](https://www.mercurial-scm.org/) or [Git](https://git-scm.com/) (whichever you used to clone this repository)
+- [Mercurial](http://tortoisehg.bitbucket.org/)
+- [Git](https://git-scm.com/) (whichever you used to clone this repository)
 - [Python 2.7](https://www.python.org)
 - [The Jinja2 module](http://jinja.pocoo.org/docs)
 - [The PIL module](http://www.pythonware.com/products/pil/)
-- For signed builds: [PyCrypto module](https://www.dlitz.net/software/pycrypto/)
+- [MS VC++ Compiler for Python 2.7](https://www.microsoft.com/en-us/download/details.aspx?id=44266)
+- PyCrypto module: easy_install http://www.voidspace.org.uk/python/pycrypto-2.6.1/pycrypto-2.6.1.win32-py2.7.exe
 
 ### Building the extension
 

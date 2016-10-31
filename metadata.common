@@ -1,5 +1,5 @@
 [general]
-version = 1.12.4
+version = 1.12.2
 backgroundScripts = lib/polyfills/url.js
   lib/polyfills/promise.js
   lib/polyfills/fetch.js
@@ -9,6 +9,9 @@ backgroundScripts = lib/polyfills/url.js
   lib/info.js
   lib/publicSuffixList.js
   lib/adblockplus.js
+  lib/sha1.js
+  lib/jsbn.js
+  lib/rsa.js
   messageResponder.js
   background.js
 testScripts = ../ext/common.js
@@ -17,10 +20,14 @@ testScripts = ../ext/common.js
   ../lib/info.js
   ../lib/adblockplus.js
   ../lib/publicSuffixList.js
+  ../lib/sha1.js
+  ../lib/jsbn.js
+  ../lib/rsa.js
   common.js
-  tests/prefs.js
+  tests/adblockplus.js
   tests/versionComparator.js
   tests/url.js
+  tests/signatures.js
   tests/cssEscaping.js
 permissions = http://*/* https://*/*
 author = Eyeo GmbH
@@ -48,6 +55,9 @@ skin/background-main.png = adblockplusui/skin/background-main.png
 skin/background-share.png = adblockplusui/skin/background-share.png
 skin/donate.png = adblockplusui/skin/donate.png
 skin/abb-logo.png = adblockplusui/skin/abb-logo.png
+skin/features/malware.png = adblockplusui/skin/features/malware.png
+skin/features/social.png = adblockplusui/skin/features/social.png
+skin/features/tracking.png = adblockplusui/skin/features/tracking.png
 skin/fonts/CreteRound-Italic.otf = adblockplusui/skin/fonts/CreteRound-Italic.otf
 skin/fonts/CreteRound-Regular.otf = adblockplusui/skin/fonts/CreteRound-Regular.otf
 skin/social/facebook.png = adblockplusui/skin/social/facebook.png
@@ -55,6 +65,8 @@ skin/social/googleplus.png = adblockplusui/skin/social/googleplus.png
 skin/social/renren.png = adblockplusui/skin/social/renren.png
 skin/social/twitter.png = adblockplusui/skin/social/twitter.png
 skin/social/weibo.png = adblockplusui/skin/social/weibo.png
+qunit/qunit.js = adblockplustests/chrome/content/qunit.js
+qunit/qunit.css = adblockplustests/chrome/content/qunit.css
 
 [convert_js]
 lib/adblockplus.js =
@@ -83,20 +95,27 @@ lib/adblockplus.js =
   adblockpluscore/lib/filterListener.js
   adblockpluscore/lib/filterNotifier.js
   adblockpluscore/lib/filterStorage.js
-  adblockpluscore/lib/jsbn.js
   adblockpluscore/lib/matcher.js
   adblockpluscore/lib/notification.js
-  adblockpluscore/lib/rsa.js
-  adblockpluscore/lib/rusha.js
   adblockpluscore/lib/subscriptionClasses.js
   adblockpluscore/lib/synchronizer.js
 lib/adblockplus.js[module] = true
 lib/adblockplus.js[source_repo] = https://hg.adblockplus.org/adblockpluscore/
-lib/adblockplus.js[autoload] = filterListener,synchronizer,requestBlocker,popupBlocker,contentBlocking,subscriptionInit,filterComposer,stats,uninstall,csp
+lib/adblockplus.js[autoload] = filterListener,synchronizer,requestBlocker,popupBlocker,contentBlocking,subscriptionInit,filterComposer,stats,uninstall
 ext/common.js = ext/common.js
 ext/background.js = ext/background.js
 ext/background.js[brace_style] = expand
 include.postload.js = subscriptionLink.postload.js composer.postload.js
+
+qunit/tests/adblockplus.js = adblockplustests/chrome/content/tests/domainRestrictions.js
+  adblockplustests/chrome/content/tests/filterClasses.js
+  adblockplustests/chrome/content/tests/filterNotifier.js
+  adblockplustests/chrome/content/tests/filterStorage.js
+  adblockplustests/chrome/content/tests/matcher.js
+  adblockplustests/chrome/content/tests/prefs.js
+  adblockplustests/chrome/content/tests/regexpFilters_matching.js
+  adblockplustests/chrome/content/tests/subscriptionClasses.js
+qunit/tests/adblockplus.js[source_repo] = https://hg.adblockplus.org/adblockplustests/
 
 [import_locales]
 adblockplus/chrome/locale/*/global.properties = subscription_invalid_location
